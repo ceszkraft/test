@@ -1,0 +1,42 @@
+logging:
+  level:
+    "[org.springframework.security.web]": DEBUG
+server:
+  port: 8080
+  # servlet:
+  #   context-path: '/v1'
+
+spring:
+   security:
+    user:
+      name: admin
+      password: passw@rd
+      roles:
+      - ADMIN
+      - USER
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: 3f63e076fbc5d44e9829
+            clientSecret: 1b936a366dd0db0f4e7efe42bc67459ce5702bc2
+   datasource:
+    url: jdbc:postgresql://localhost:5432/tcc
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+   jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      "[unique_constraint_strategy]" : RECREATE_QUIETLY
+      hibernate:
+        "[schema_update.unique_constraint_strategy]" : RECREATE_QUIETLY
+        "[show_sql]": true
+        "[use_sql_comments]": true
+        "[format_sql]": true
+        jdbc:
+          lob:
+            "[non_contextual_creation]": true
+  

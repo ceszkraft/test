@@ -1,0 +1,20 @@
+version: "3.8"
+
+networks:
+  tcc-network:
+    driver:
+      bridge
+
+services:
+  postgres:
+    container_name: postgres-db
+    restart: on-failure
+    image: "postgres:15.4-alpine3.18"
+    networks:
+      - "tcc-network"
+    environment:
+      - "POSTGRES_DB=tcc"
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_USER=postgres"
+    ports:
+      - "5432:5432"
