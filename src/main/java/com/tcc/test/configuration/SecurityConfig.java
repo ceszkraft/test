@@ -1,14 +1,17 @@
 package com.tcc.test.configuration;
 
+import com.tcc.test.model.enums.RoleEnum;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
@@ -25,16 +28,29 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(requests ->
-            // requests.requestMatchers(HttpMethod.GET, "/login/all").hasAuthority(RoleEnum.ADMIN.toString())
+        requests
+//             requests.requestMatchers(HttpMethod.GET, "/person").hasAuthority(RoleEnum.ADMIN.toString())
+//                 .requestMatchers(HttpMethod.POST, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
+//                 .requestMatchers(HttpMethod.PUT, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
+//
+//                 .requestMatchers(HttpMethod.DELETE, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
+                 .requestMatchers(HttpMethod.DELETE, "/**").permitAll()
+                 .requestMatchers(HttpMethod.PUT, "/**").permitAll()
+                 .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                 .requestMatchers(HttpMethod.POST, "/**").permitAll()
+
 //        requests.requestMatchers(HttpMethod.GET, "/").authenticated()
-            requests.requestMatchers(HttpMethod.GET, "/").permitAll()
-            .requestMatchers(HttpMethod.POST, "/").permitAll()
+//                .requestMatchers(HttpMethod.POST, "/").permitAll()
+//                .requestMatchers(HttpMethod.PUT, "/").permitAll()
+//                .requestMatchers(HttpMethod.DELETE, "/").permitAll()
 //            .requestMatchers(HttpMethod.POST, "/person").hasAuthority(RoleEnum.ADMIN.toString())
 //            .requestMatchers(HttpMethod.GET, "/person").hasAuthority(RoleEnum.ADMIN.toString())
 
                 .anyRequest().permitAll()
     );
 
+    http.csrf(AbstractHttpConfigurer::disable);
+    http.cors(withDefaults());
 //    http.oauth2Login(withDefaults());
     http.httpBasic(withDefaults());
     http.formLogin(withDefaults());
