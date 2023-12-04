@@ -1,20 +1,45 @@
 version: "3.8"
 
 networks:
-  tcc-network:
-    driver:
-      bridge
+  net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.55.0/24
+          gateway: 192.168.55.1
 
 services:
   postgres:
-    container_name: postgres-db
-    restart: always
-    image: "postgres:15.4-alpine3.18"
-    networks:
-      - "tcc-network"
-    environment:
-      - "POSTGRES_DB=tcc"
-      - "POSTGRES_PASSWORD=postgres"
-      - "POSTGRES_USER=postgres"
+    image: postgres:15.4-alpine3.18
+    container_name: postgres
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_DB: tcc
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d tcc"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    container_name: backend
+    ports:
+      - "8080:8080"
+    networks:
+      - net
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tcc
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
