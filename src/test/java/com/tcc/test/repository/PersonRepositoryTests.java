@@ -106,22 +106,13 @@ public class PersonRepositoryTests {
 
   @DisplayName(value = "Delete Person Object")
   @Test
-  @Disabled
   public void shouldDeleteAPersonObject() {
 
     UUID id = UUID.fromString(String.valueOf(person.getId()));
+    PersonRepository repositoryMock = mock(PersonRepository.class);
 
-//    PersonRepository repositoryMock = mock(PersonRepository.class);
-//    when(repositoryMock.deleteById(id)).thenReturn(person);
-
-//    var saveObject = repositoryMock.findByCpf(person.getCpf());
-
-
-//    repository.deleteById(id);
-
-//    assertThat(saveObject).isNotNull();
-//    assertThat(saveObject.stream().map(PersonModel::getId)).isEqualTo(List.of());
-//    assertThat(saveObject).isEqualTo(Optional.empty());
+    repositoryMock.deleteById(id);
+    verify(repositoryMock).deleteById(any()); // check that the method was called
 
   }
 

@@ -43,3 +43,17 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+  frontend:
+    container_name: frontend
+    ports:
+      - "4200:80"
+    networks:
+      - net
+    build:
+      context: ../frontned/tcc-front/.
+      dockerfile: Dockerfile
+    depends_on:
+      backend:
+        condition: service_completed_successfully
+

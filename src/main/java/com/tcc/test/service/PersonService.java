@@ -52,7 +52,7 @@ public class PersonService {
   @Transactional
   public PersonDTO delete(UUID id) throws NotFoundException {
     PersonDTO dto = this.findById(id);
-    repository.deleteById(dto.getId());
+    this.repository.deleteById(dto.getId());
     return dto;
   }
 

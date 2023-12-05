@@ -1,6 +1,10 @@
 server:
 port: 8888
 
+logging:
+  level:
+    root: DEBUG
+
 spring:
   datasource:
     url: jdbc:postgresql://postgres:5432/tcc
