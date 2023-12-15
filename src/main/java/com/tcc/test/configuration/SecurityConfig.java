@@ -28,11 +28,16 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(requests ->
-
-             requests.requestMatchers(HttpMethod.GET, "/person").hasAuthority(RoleEnum.ADMIN.toString())
-                 .requestMatchers(HttpMethod.POST, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
-                 .requestMatchers(HttpMethod.PUT, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
-                 .requestMatchers(HttpMethod.DELETE, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
+        requests
+//             requests.requestMatchers(HttpMethod.GET, "/person").hasAuthority(RoleEnum.ADMIN.toString())
+//                 .requestMatchers(HttpMethod.POST, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
+//                 .requestMatchers(HttpMethod.PUT, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
+//
+//                 .requestMatchers(HttpMethod.DELETE, "/person/**").hasAuthority(RoleEnum.ADMIN.toString())
+//                 .requestMatchers(HttpMethod.DELETE, "/**").permitAll()
+//                 .requestMatchers(HttpMethod.PUT, "/**").permitAll()
+//                 .requestMatchers(HttpMethod.GET, "/**").permitAll()
+//                 .requestMatchers(HttpMethod.POST, "/**").permitAll()
 
 //        requests.requestMatchers(HttpMethod.GET, "/").authenticated()
 //                .requestMatchers(HttpMethod.POST, "/").permitAll()
@@ -44,6 +49,8 @@ public class SecurityConfig {
                 .anyRequest().permitAll()
     );
 
+//    http.csrf(AbstractHttpConfigurer::disable);
+//    http.cors(withDefaults());
 //    http.oauth2Login(withDefaults());
     http.httpBasic(withDefaults());
     http.formLogin(withDefaults());
