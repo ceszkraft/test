@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .anyRequest().permitAll()
     );
 
-//    http.csrf(AbstractHttpConfigurer::disable);
+    http.csrf(AbstractHttpConfigurer::disable);
 //    http.cors(withDefaults());
 //    http.oauth2Login(withDefaults());
     http.httpBasic(withDefaults());

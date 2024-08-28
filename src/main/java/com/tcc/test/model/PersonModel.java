@@ -28,11 +28,8 @@ public class PersonModel implements UserDetails{
   @Column(length = 11, nullable = false)
   private String cpf;
 
-  @Column(name = "primeiro_nome", length = 60, nullable = false)
-  private String firstName;
-
-  @Column(name = "ultimo_nome", length = 60, nullable = false)
-  private String lastName;
+  @Column(name = "nome_completo", length = 60, nullable = false)
+  private String fullName;
 
   @Column(name = "data_nascimento", length = 10, nullable = false)
   private LocalDate birthday;

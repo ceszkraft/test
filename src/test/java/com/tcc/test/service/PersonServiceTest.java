@@ -1,7 +1,6 @@
 package com.tcc.test.service;
 
 import com.github.dockerjava.api.exception.NotFoundException;
-import com.tcc.test.model.PersonModel;
 import com.tcc.test.model.dto.PersonDTO;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

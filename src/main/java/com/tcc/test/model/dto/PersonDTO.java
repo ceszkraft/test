@@ -20,15 +20,11 @@ public class PersonDTO {
 
   private UUID id;
 
-  @NotNull(message = "First name must be filled")
-  @NotBlank(message = "First name cannot be blank")
-  private String firstName;
+  @NotNull(message = "Name must be filled")
+  @NotBlank(message = "Name cannot be blank")
+  private String fullName;
 
-  @NotNull(message = "Last name must be filled")
-  @NotBlank(message = "Last name cannot be blank")
-  private String lastName;
-
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDate birthday;
 
   @Email

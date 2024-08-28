@@ -19,8 +19,7 @@ public class PersonMapper {
    public PersonModel toEntity(PersonDTO dto) {
       PersonModel personModel = new PersonModel();
       personModel.setId(dto.getId());
-      personModel.setFirstName(dto.getFirstName());
-      personModel.setLastName(dto.getLastName());
+      personModel.setFullName(dto.getFullName());
       personModel.setCpf(dto.getCpf());
       personModel.setBirthday(dto.getBirthday());
       personModel.setEmail(dto.getEmail());
@@ -32,8 +31,7 @@ public class PersonMapper {
    public PersonDTO toDTO(PersonModel PersonModel) {
       PersonDTO dto = new PersonDTO();
       dto.setId(PersonModel.getId());
-      dto.setFirstName(PersonModel.getFirstName());
-      dto.setLastName(PersonModel.getLastName());
+      dto.setFullName(PersonModel.getFullName());
       dto.setCpf(PersonModel.getCpf());
       dto.setEmail(PersonModel.getEmail());
       dto.setBirthday(PersonModel.getBirthday());
