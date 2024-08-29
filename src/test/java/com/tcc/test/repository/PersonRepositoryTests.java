@@ -25,6 +25,7 @@ public class PersonRepositoryTests {
   @Autowired
   private PersonRepository repository;
   private PersonModel person;
+
   @BeforeEach
   public void setup() {
     person = new PersonModel();
@@ -32,8 +33,7 @@ public class PersonRepositoryTests {
     person.setBirthday(LocalDate.of(1992, 12, 7));
     person.setEmail("testing@gmail.com");
     person.setCpf("57163091001");
-    person.setFirstName("Ignis");
-    person.setLastName("Glacies");
+    person.setFullName("Glacies Test");
     // 123
     person.setSecret("$2a$12$Un0KDsZ1gWC/1dzzRIHee.6b/QIgPBLqRMvnXj9FHtPl8OXe3Y1dG");
     person.setUsername("Glacies");
@@ -116,37 +116,6 @@ public class PersonRepositoryTests {
 
   }
 
-  @DisplayName(value = "Should use a custom JPQL")
-  @Test
-  public void shouldUseCustomJPQLFunction() {
-//    @Query(value = "SELECT p from PersonModel p WHERE p.firstName =?1 and p.lastName = ?2")
-//    PersonModel findByJPQL(String firstName, String lastName);
-
-    PersonRepository repositoryMock = mock(PersonRepository.class);
-    when(repositoryMock.findByJPQLnamedParameters(person.getFirstName(), person.getLastName())).thenReturn(person);
-
-    var saveObject = repositoryMock.findByJPQLnamedParameters(person.getFirstName(), person.getLastName());
-
-    assertThat(saveObject).isNotNull();
-    assertThat(saveObject).isExactlyInstanceOf(PersonModel.class);
-    assertThat(saveObject.getId()).isEqualTo(person.getId());
-
-
-  }
-  @DisplayName(value = "Using JPQL @Param()")
-  @Test
-  public void shouldTestParamAndJPQLFunction() {
-
-    PersonRepository repositoryMock = mock(PersonRepository.class);
-    when(repositoryMock.findByJPQL(person.getFirstName(), person.getLastName())).thenReturn(person);
-
-    var saveObject = repositoryMock.findByJPQL(person.getFirstName(), person.getLastName());
-
-    assertThat(saveObject).isNotNull();
-    assertThat(saveObject).isExactlyInstanceOf(PersonModel.class);
-    assertThat(saveObject.getId()).isEqualTo(person.getId());
-
-  }
 
   @DisplayName(value = "Using JPQL Native Query")
   @Test
@@ -178,17 +147,9 @@ public class PersonRepositoryTests {
   }
 
 
-  @DisplayName(value = "findById()")
   @Test
-  public void shouldReturnPersonById() {
+  void testFindByJPQLNativeQueryWithParams() {
 
-    PersonRepository repositoryMock = Mockito.mock(PersonRepository.class);
-    when(repositoryMock.findByJPQLnamedParameters(person.getFirstName(), person.getLastName())).thenReturn(person);
-
-    var saveObject = repositoryMock.findByJPQLnamedParameters(person.getFirstName(), person.getLastName());
-
-    assertThat(saveObject).isNotNull();
-    assertThat(saveObject.getId()).isEqualTo(person.getId());
 
   }
 }

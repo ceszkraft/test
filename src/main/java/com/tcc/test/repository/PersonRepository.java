@@ -24,5 +24,4 @@ public interface PersonRepository extends JpaRepository<PersonModel, UUID> {
       @Param("cpf") String cpf,
       @Param("email") String email);
 
-
 }

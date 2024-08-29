@@ -29,8 +29,7 @@ public class PersonServiceTest {
     personDTO.setBirthday(LocalDate.of(1992, 12, 7));
     personDTO.setEmail("brancocaesar@icloud.com");
     personDTO.setCpf("10284501417");
-    personDTO.setFirstName("Caesar");
-    personDTO.setLastName("Branco");
+    personDTO.setFullName("Caesar Branco");
     // 123
     personDTO.setPassword("$2a$12$Un0KDsZ1gWC/1dzzRIHee.6b/QIgPBLqRMvnXj9FHtPl8OXe3Y1dG");
     personDTO.setUsername("REXbranco");
